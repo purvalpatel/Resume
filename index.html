@@ -59,6 +59,26 @@
       min-width: 20px;
       text-align: center;
     }
+    .skill::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .skill:hover::after {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -86,7 +106,7 @@
   <section>
     <h2>Skills</h2>
     <div class="skills-container">
-  <div class="skill"><i class="fas fa-cloud"></i> Cloud Infrastructure</div>
+  <div class="skill" data-tooltip="Design and manage cloud resources"><i class="fas fa-cloud"></i> Cloud Infrastructure</div>
   <div class="skill"><i class="fas fa-terminal"></i> Linux</div>
   <div class="skill"><i class="fas fa-cogs"></i> Platform Engineering</div>
   <div class="skill"><i class="fas fa-university"></i> Cloud Governance</div>
