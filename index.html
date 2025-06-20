@@ -52,17 +52,20 @@
       background: #f0f0f0;
       box-shadow: 0 0 8px rgba(0,0,0,0.05);
     }
-
     .skill i {
+      position: relative;
       margin-right: 10px;
       color: #3a3a3a;
       min-width: 20px;
       text-align: center;
+      cursor: help;
     }
-    .skill::after {
+
+
+    .skill i::after {
       content: attr(data-tooltip);
       position: absolute;
-      bottom: 110%;
+      bottom: 125%;
       left: 50%;
       transform: translateX(-50%);
       background: #333;
@@ -74,9 +77,10 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s;
+      z-index: 99;
     }
-
-    .skill:hover::after {
+    
+    .skill i:hover::after {
       opacity: 1;
     }
   </style>
