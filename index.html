@@ -28,6 +28,37 @@
       display: inline-block;
       margin-right: 10px;
     }
+    .skills-container {
+      background-color: #101524;
+      padding: 30px;
+      border-radius: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      max-width: 1000px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .skill {
+      border: 1px solid #2a2f44;
+      padding: 12px 16px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.02);
+      transition: background 0.3s;
+    }
+
+    .skill:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .skill i {
+      margin-right: 10px;
+      color: #7da2ff;
+      min-width: 20px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -54,6 +85,25 @@
 
   <section>
     <h2>Skills</h2>
+    <div class="skills-container">
+  <div class="skill"><i class="fas fa-cloud"></i> Cloud Infrastructure</div>
+  <div class="skill"><i class="fas fa-terminal"></i> Linux</div>
+  <div class="skill"><i class="fas fa-cogs"></i> Platform Engineering</div>
+  <div class="skill"><i class="fas fa-university"></i> Cloud Governance</div>
+  <div class="skill"><i class="fas fa-dollar-sign"></i> Cost Optimization</div>
+  <div class="skill"><i class="fas fa-check-circle"></i> Platform Reliability</div>
+  <div class="skill"><i class="fab fa-kubernetes"></i> Kubernetes</div>
+  <div class="skill"><i class="fas fa-boxes"></i> Containerization</div>
+  <div class="skill"><i class="fas fa-code"></i> Infrastructure as Code (IaC)</div>
+  <div class="skill"><i class="fas fa-sliders-h"></i> Configuration Management</div>
+  <div class="skill"><i class="fas fa-sync-alt"></i> CI/CD</div>
+  <div class="skill"><i class="fas fa-robot"></i> DevOps Automation</div>
+  <div class="skill"><i class="fas fa-project-diagram"></i> Workflow Optimization</div>
+  <div class="skill"><i class="fas fa-rocket"></i> Release Management</div>
+  <div class="skill"><i class="fas fa-eye"></i> Logging and Monitoring</div>
+  <div class="skill"><i class="fas fa-chart-line"></i> Observability</div>
+  <div class="skill"><i class="fas fa-user-shield"></i> Access Management</div>
+</div>
     <ul>
       <li>Linux Administration, Linux Hardening, OS Developement</li>
       <li>Programming: Shell Script, Python, Ansible, YAML, PHP, Groovy</li>
