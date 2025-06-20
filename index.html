@@ -84,6 +84,20 @@
     .skill i:hover::after {
       opacity: 1;
     }
+    .blinking-dot {
+      height: 10px;
+      width: 10px;
+      background-color: #00cc44;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+      animation: blink 1s infinite;
+    }
+  
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -91,6 +105,10 @@
   <center><p>  <img src="photo.png" alt="profile photo" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" /></p>
   <h1>Purval Patel</h1>
   <p><strong>DevOps Engineer</strong></p></center>
+  <p style="display: flex; align-items: center; font-weight: bold;">
+  <span class="blinking-dot"></span>
+  Currently in Surat, India
+</p>
 <table style="width: 100%; border-collapse: collapse;">
   <tr>
     <td style="padding: 5px;">📞 (9909)112 848</td>
