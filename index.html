@@ -14,6 +14,21 @@
       background: #f7f7f7;
       color: #333;
     }
+       .changing-text {
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .changing-text i {
+      color: #a78bfa;
+    }
+
+    .word {
+      font-weight: 600;
+      transition: opacity 0.5s ease;
+    }
       .job-title {
       font-size: 18px;
       font-weight: 500;
@@ -114,6 +129,27 @@
       50% { opacity: 0; }
     }
   </style>
+    <div class="changing-text">
+    <i class="fas fa-cog"></i>
+    <span class="word" id="word">Automation Enthusiast</span>
+  </div>
+
+  <script>
+    const words = ["Automation Enthusiast", "DevOps Engineer", "CI/CD Specialist", "Kubernetes Fan"];
+    let index = 0;
+
+    setInterval(() => {
+      index = (index + 1) % words.length;
+      const wordElement = document.getElementById("word");
+      wordElement.style.opacity = 0;
+
+      setTimeout(() => {
+        wordElement.textContent = words[index];
+        wordElement.style.opacity = 1;
+      }, 300);
+    }, 2500);
+  </script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
