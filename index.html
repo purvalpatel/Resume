@@ -3,116 +3,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <title>Purval Patel - Resume</title>
+  <title>Purval Patel · 3D Portfolio</title>
+  <!-- Font Awesome (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Google Font for modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-      background: #f7f7f7;
-      color: #333;
+    /* reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-      .changing-text {
-      font-size: 1.1rem;
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0b0d15;
+      color: #eaeef2;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1rem;
+      perspective: 1200px;
+    }
+
+    /* 3D card container */
+    .scene {
+      width: 100%;
+      max-width: 1100px;
+      transition: transform 0.1s;
+      transform-style: preserve-3d;
+    }
+
+    .card-3d {
+      background: rgba(18, 22, 33, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 2.5rem;
+      padding: 2.2rem 2.5rem;
+      box-shadow: 0 25px 50px -8px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04);
+      transform: rotateX(2deg) rotateY(-1deg) translateZ(10px);
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    /* subtle 3D hover effect via JS (mouse move) */
+    .card-3d:hover {
+      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(167, 139, 250, 0.2);
+    }
+
+    /* profile row */
+    .profile-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem 1rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .profile-left {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #a78bfa;
+      box-shadow: 0 0 20px rgba(167, 139, 250, 0.25);
+      transition: transform 0.3s;
+    }
+    .avatar:hover { transform: scale(1.02) rotate(1deg); }
+
+    .name-title h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #f0f3ff, #b9abff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .changing-text {
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      font-size: 1.1rem;
+      background: rgba(167, 139, 250, 0.08);
+      padding: 0.3rem 1rem 0.3rem 0.8rem;
+      border-radius: 40px;
+      border: 1px solid rgba(167, 139, 250, 0.15);
+      backdrop-filter: blur(2px);
+      width: fit-content;
     }
-
-    .changing-text i {
-      color: #a78bfa;
-    }
-
+    .changing-text i { color: #a78bfa; font-size: 1rem; }
     .word {
       font-weight: 600;
-      transition: opacity 0.5s ease;
-    }
-      .job-title {
-      font-size: 18px;
-      font-weight: 500;
-      margin-bottom: 3px;
-    }
-    .job-meta {
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 12px;
-    }
-    h1, h2 {
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 4px;
-    }
-    section {
-      margin-bottom: 30px;
-    }
-    ul {
-      margin: 0;
-      padding-left: 20px;
-    }
-    .contact a {
+      color: #d6ccff;
+      min-width: 130px;
       display: inline-block;
-      margin-right: 10px;
+      transition: opacity 0.3s ease;
     }
-    .skills-container {
-      background-color: #f9f9f9;
-      padding: 30px;
-      border-radius: 16px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-      max-width: 1000px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .job-header i {
-      font-size: 20px;
-      margin-right: 8px;
-      color: #333;
-    }
-    .skill {
-      border: 1px solid #ccc;
-      padding: 12px 16px;
-      border-radius: 12px;
+
+    .status-badge {
       display: flex;
       align-items: center;
-      background: #ffffff;
-      transition: background 0.3s, box-shadow 0.3s;
-    }
-
-    .skill:hover {
-      background: #f0f0f0;
-      box-shadow: 0 0 8px rgba(0,0,0,0.05);
-    }
-    .skill i {
-      position: relative;
-      margin-right: 10px;
-      color: #3a3a3a;
-      min-width: 20px;
-      text-align: center;
-      cursor: help;
-    }
-
-
-    .skill i::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: 125%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #333;
-      color: #fff;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 12px;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-      z-index: 99;
-    }
-    
-    .skill i:hover::after {
-      opacity: 1;
+      gap: 0.5rem;
+      background: rgba(0, 204, 68, 0.08);
+      padding: 0.3rem 1.2rem 0.3rem 0.8rem;
+      border-radius: 40px;
+      border: 1px solid rgba(0, 204, 68, 0.15);
+      font-weight: 500;
+      font-size: 0.95rem;
     }
     .blinking-dot {
       height: 10px;
@@ -120,198 +128,380 @@
       background-color: #00cc44;
       border-radius: 50%;
       display: inline-block;
-      margin-right: 8px;
-      animation: blink 1s infinite;
+      animation: blink 1.2s infinite;
     }
-  
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+    /* contact grid */
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.2rem;
+      background: rgba(255,255,255,0.02);
+      padding: 0.8rem 1.2rem;
+      border-radius: 60px;
+      border: 1px solid rgba(255,255,255,0.03);
+      margin: 1.2rem 0 1.8rem 0;
+      justify-content: center;
     }
+    .contact-grid a, .contact-grid span {
+      color: #c8d0e0;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: 0.2s;
+    }
+    .contact-grid a:hover { color: #a78bfa; text-shadow: 0 0 6px #a78bfa55; }
+    .contact-grid i { width: 1.1rem; color: #9aa4bf; }
+
+    /* headings */
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding-bottom: 0.5rem;
+      margin: 1.8rem 0 1.2rem 0;
+      color: #d6dfff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    h2 i { color: #a78bfa; font-size: 1.2rem; }
+
+    /* objective */
+    .objective-text {
+      background: rgba(255,255,255,0.02);
+      padding: 1.2rem 1.5rem;
+      border-radius: 20px;
+      border-left: 4px solid #a78bfa;
+      line-height: 1.6;
+      color: #d0d8ec;
+    }
+
+    /* skills 3D grid */
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 0.8rem;
+      margin: 0.5rem 0 0.2rem;
+    }
+    .skill {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.04);
+      padding: 0.65rem 1rem;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+      backdrop-filter: blur(2px);
+      transform: translateZ(2px);
+    }
+    .skill:hover {
+      background: rgba(167, 139, 250, 0.08);
+      border-color: #a78bfa44;
+      transform: translateZ(8px) scale(1.01);
+      box-shadow: 0 8px 20px -10px #a78bfa33;
+    }
+    .skill i { color: #b4befe; width: 1.2rem; text-align: center; }
+    .skill i[data-tooltip] { position: relative; cursor: help; }
+    .skill i[data-tooltip]:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 130%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e2233;
+      color: #eee;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      white-space: nowrap;
+      border: 1px solid #3d3f5e;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      pointer-events: none;
+    }
+
+    /* experience entries */
+    .exp-block {
+      margin-top: 1.2rem;
+    }
+    .exp-company {
+      font-weight: 600;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #e4eaff;
+    }
+    .exp-company a { color: #b9abff; text-decoration: none; }
+    .exp-company a:hover { text-decoration: underline; }
+    .job-title {
+      font-weight: 500;
+      color: #cbd5f0;
+      margin: 0.2rem 0 0.1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+    .job-meta {
+      color: #8e99b3;
+      font-size: 0.8rem;
+      letter-spacing: 0.2px;
+      margin-bottom: 0.4rem;
+    }
+    .exp-list {
+      list-style: none;
+      padding-left: 0.8rem;
+      margin: 0.5rem 0 1rem 0;
+    }
+    .exp-list li {
+      padding: 0.2rem 0 0.2rem 1.3rem;
+      position: relative;
+      color: #cdd6ec;
+      line-height: 1.5;
+      font-size: 0.92rem;
+    }
+    .exp-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #a78bfa;
+    }
+
+    /* education/certs */
+    .edu-list, .cert-list, .project-list {
+      list-style: none;
+      padding-left: 0.2rem;
+    }
+    .edu-list li, .cert-list li, .project-list li {
+      padding: 0.25rem 0 0.25rem 1.3rem;
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.02);
+    }
+    .edu-list li::before, .cert-list li::before, .project-list li::before {
+      content: "◆";
+      position: absolute;
+      left: 0;
+      color: #8e7ecf;
+      font-size: 0.6rem;
+      top: 0.6rem;
+    }
+
+    /* responsive */
+    @media (max-width: 700px) {
+      .card-3d { padding: 1.5rem; }
+      .profile-left { flex-wrap: wrap; }
+      .name-title h1 { font-size: 1.8rem; }
+      .contact-grid { border-radius: 30px; justify-content: center; }
+      .skills-container { grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); }
+    }
+    @media (max-width: 480px) {
+      .card-3d { padding: 1rem; }
+      .changing-text { font-size: 0.9rem; }
+    }
+
+    /* small extras */
+    .glow-icon { color: #a78bfa; }
+    .mt-1 { margin-top: 0.5rem; }
+    .flex { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
   </style>
-
-
-  <script>
-    const words = ["DevOps Engineer", "SRE", "System Administrator","MLops","DevSecOps"];
-    let index = 0;
-
-    setInterval(() => {
-      index = (index + 1) % words.length;
-      const wordElement = document.getElementById("word");
-      wordElement.style.opacity = 0;
-
-      setTimeout(() => {
-        wordElement.textContent = words[index];
-        wordElement.style.opacity = 1;
-      }, 300);
-    }, 2500);
-  </script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+  <div class="scene" id="scene3d">
+    <div class="card-3d" id="card3d">
+      
+      <!-- profile -->
+      <div class="profile-row">
+        <div class="profile-left">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23262b44'/%3E%3Ccircle cx='50' cy='38' r='18' fill='%23a78bfa' opacity='0.3'/%3E%3Ccircle cx='50' cy='38' r='10' fill='%23d6ccff'/%3E%3Cpath d='M22 78 Q50 60 78 78' stroke='%23a78bfa' stroke-width='6' fill='none' opacity='0.4'/%3E%3C/svg%3E" alt="Purval Patel" class="avatar">
+          <div class="name-title">
+            <h1>Purval Patel</h1>
+            <div class="changing-text">
+              <i class="fas fa-cog fa-spin"></i>
+              <span class="word" id="word">DevOps Engineer</span>
+            </div>
+          </div>
+        </div>
+        <div class="status-badge">
+          <span class="blinking-dot"></span> Currently in Vapi, India
+        </div>
+      </div>
 
-  <center><p>  <img src="photo.png" alt="profile photo" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" /></p>
-  <h1>Purval Patel</h1>
+      <!-- contact -->
+      <div class="contact-grid">
+        <span><i class="fas fa-phone-alt"></i> (9909) 112 848</span>
+        <a href="http://impurval.blogspot.com" target="_blank"><i class="fas fa-globe"></i> impurval.blogspot.com</a>
+        <a href="mailto:purval1992@gmail.com"><i class="fas fa-envelope"></i> purval1992@gmail.com</a>
+        <a href="https://www.linkedin.com/in/purval-patel-491a21a1" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+        <a href="https://www.github.com/purvalpatel" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      </div>
 
-  <div class="changing-text">
-    <i class="fas fa-cog"></i>
-    <span class="word" id="word" align="center">Devops Engineer</span>
+      <!-- objective -->
+      <h2><i class="fas fa-bullseye"></i> Objective</h2>
+      <div class="objective-text">
+        Lead DevOps/MLOps Engineer with 10+ years of experience in Linux systems, Kubernetes, multi-cloud platform engineering, NVIDIA AI infrastructure, and MLOps. Deep expertise in the Kubernetes ecosystem with extensive experience designing scalable systems across hybrid cloud and on-premises environments, currently driving MLOps initiatives by architecting AI/ML infrastructure using Ray Data, Train for distributed computing, MLflow, and LangChain, focusing on building robust, cloud-native pipelines for machine learning workloads. Experience in healthcare projects and AI model deployment, delivering secure, scalable, and compliant AI-driven solutions.
+      </div>
+
+      <!-- skills -->
+      <h2><i class="fas fa-cog"></i> Skills</h2>
+      <div class="skills-container">
+        <div class="skill"><i class="fas fa-cloud" data-tooltip="AWS, Azure"></i> Cloud Infra</div>
+        <div class="skill"><i class="fas fa-terminal" data-tooltip="OS customization"></i> Linux</div>
+        <div class="skill"><i class="fas fa-cogs"></i> Platform Eng.</div>
+        <div class="skill"><i class="fas fa-university"></i> Cloud Governance</div>
+        <div class="skill"><i class="fas fa-dollar-sign"></i> Cost Optimization</div>
+        <div class="skill"><i class="fas fa-check-circle"></i> Reliability</div>
+        <div class="skill"><i class="fab fa-kubernetes"></i> Kubernetes</div>
+        <div class="skill"><i class="fas fa-boxes"></i> Containerization</div>
+        <div class="skill"><i class="fas fa-code"></i> IaC (Terraform)</div>
+        <div class="skill"><i class="fas fa-sliders-h"></i> Config Mgmt</div>
+        <div class="skill"><i class="fas fa-sync-alt"></i> CI/CD</div>
+        <div class="skill"><i class="fas fa-robot"></i> DevOps Automation</div>
+        <div class="skill"><i class="fas fa-project-diagram"></i> Workflow Opt.</div>
+        <div class="skill"><i class="fas fa-rocket"></i> Release Mgmt</div>
+        <div class="skill"><i class="fas fa-eye"></i> Logging &amp; Monitoring</div>
+        <div class="skill"><i class="fas fa-chart-line"></i> Observability</div>
+        <div class="skill"><i class="fas fa-user-shield"></i> Access Mgmt</div>
+        <div class="skill"><i class="fas fa-microchip"></i> NVIDIA Eco</div>
+      </div>
+
+      <!-- experience -->
+      <h2><i class="fas fa-briefcase"></i> Experience</h2>
+
+      <div class="exp-block">
+        <div class="exp-company"><i class="fas fa-building" style="color:#a78bfa;"></i> <a href="https://www.merillife.com/" target="_blank">Meril</a> (Vapi, India)</div>
+        <div class="job-title">MLOps Engineer <span class="job-meta" style="margin-left:auto;"><i class="fas fa-calendar-alt"></i> May 2025 – Present</span></div>
+        <ul class="exp-list">
+          <li>Running containerized applications on bare-metal using Docker &amp; Kubernetes</li>
+          <li>Designed scalable, secure Kubernetes clusters across multi-environment setups</li>
+          <li>Architected on-premises Kubernetes clusters for GPU-accelerated AI/ML workloads</li>
+          <li>Managed large-scale Kubernetes infrastructure with ~50 GPU nodes</li>
+          <li>Implemented GPU resource orchestration (CUDA, NVIDIA device plugin, MIG)</li>
+          <li>DevOps pipeline with GitLab CI/CD, Quay, ArgoCD</li>
+          <li>Kubernetes ecosystem: cert-manager, Istio, Kyverno, Prometheus, Grafana</li>
+          <li>Implemented S3-compatible storage: MinIO, NetApp, Dell ECS, Garage, Supabase</li>
+          <li>MLOps pipelines with Kubeflow, KServe, MLflow, Phoenix, Evidently AI</li>
+          <li>GPU monitoring with nvidia-smi, DCGM, Nsight</li>
+          <li>JupyterHub on Kubernetes via Helm</li>
+          <li>Distributed computing stack: Ray Data, Train, LangChain, Quadrant D, MinIO</li>
+          <li>Scalable model deployment with KEDA</li>
+          <li>RNA-Seq pipelines using AWS Lambda, HealthOmics, Batch, EC2, DynamoDB</li>
+          <li>eBPF-based security (Falco), SAST/DAST: SonarQube, Burp Suite</li>
+        </ul>
+      </div>
+
+      <div class="exp-block">
+        <div class="exp-company"><i class="fas fa-building" style="color:#a78bfa;"></i> <a href="https://uffizio.com" target="_blank">Uffizio India Pvt. Ltd.</a> (Valsad, India)</div>
+        <div class="job-title">DevOps Engineer Lead <span class="job-meta" style="margin-left:auto;"><i class="fas fa-calendar-alt"></i> Aug 2024 – May 2025</span></div>
+        <div class="job-title">Sr. DevOps Engineer <span class="job-meta" style="margin-left:auto;"><i class="fas fa-calendar-alt"></i> Aug 2019 – Aug 2024</span></div>
+        <ul class="exp-list">
+          <li>Leading team of 4 DevOps engineers</li>
+          <li>Manage cloud infrastructure on AWS (EC2, S3, RDS, Glacier, Global Accelerator, Kinesis, CloudFront, Direct Connect, VPN)</li>
+          <li>Handling 250+ instances on AWS and on-premises</li>
+          <li>Monitoring: Nagios, Zabbix, DataDog, NewRelic</li>
+          <li>Migrated applications to containerized environment</li>
+          <li>CI/CD with Jenkins, Ansible, GitLab, JFrog, Kafka, Redis, RabbitMQ</li>
+          <li>Databases: MongoDB, MySQL, Postgres, Cassandra</li>
+          <li>NGINX as LB and RTMP server</li>
+          <li>WAF setup, vulnerability assessments</li>
+          <li>Scripting: Bash, Python, Terraform</li>
+          <li>Webserver: Nginx, Apache2, Tomcat</li>
+          <li>Domain &amp; SSL management</li>
+          <li>Centralized logging: Kibana, Elasticsearch, Filebeat/Fluentd</li>
+          <li>Velero backup &amp; disaster recovery</li>
+        </ul>
+      </div>
+
+      <div class="exp-block">
+        <div class="exp-company"><i class="fas fa-building" style="color:#a78bfa;"></i> <a href="https://enjayworld.com" target="_blank">Enjay IT Solutions Ltd.</a> (Bhilad, India)</div>
+        <div class="job-title">Linux Developer <span class="job-meta" style="margin-left:auto;"><i class="fas fa-calendar-alt"></i> Mar 2016 – Aug 2019</span></div>
+        <ul class="exp-list">
+          <li>Developed customized Linux OS (Tiguin Desktop, Tally Desktop, Toranado OS)</li>
+          <li>Managed 100+ servers, patch management, alert systems</li>
+          <li>LDAP, NFS, SAMBA, FTP, webserver setup</li>
+          <li>Bash/Python scripting, driver/package compilation</li>
+          <li>Desktop apps with Python GTK</li>
+          <li>VPN server/client configuration, in-house patch server</li>
+        </ul>
+      </div>
+
+      <!-- education -->
+      <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+      <ul class="edu-list">
+        <li>MCA (73%) – University of Pune (2012–2015)</li>
+        <li>BCA – VNSGU Surat (2010–2012)</li>
+      </ul>
+
+      <!-- certifications -->
+      <h2><i class="fas fa-certificate"></i> Certifications</h2>
+      <ul class="cert-list">
+        <li>RHCSA – RedHat Certified System Administrator</li>
+        <li>RHCE – RedHat Certified Engineer</li>
+        <li>Certified Infra AI Expert: End-to-End GPU-Accelerated AI</li>
+        <li>NCA-AIIO SoAI-Certified Associate: AI Infrastructure &amp; Ops</li>
+        <li>Introducing MLOps: From Model Development to Deployment</li>
+      </ul>
+
+      <!-- projects -->
+      <h2><i class="fas fa-flask"></i> Academic Projects</h2>
+      <ul class="project-list">
+        <li>MCA: Online Shopping Portal (PHP), University of Pune (Mar 2015)</li>
+        <li>BCA: Restaurants Management System (PHP), VNSGU Surat (Apr 2012)</li>
+      </ul>
+      
+      <div style="margin-top: 2rem; opacity:0.3; font-size:0.7rem; text-align:center; border-top:1px solid rgba(255,255,255,0.03); padding-top:1rem;">
+        <i class="fas fa-cube"></i> 3D portfolio · Purval Patel
+      </div>
+    </div>
   </div>
-  <p style="display: flex; align-items: center; font-weight: bold;">
-  <span class="blinking-dot"></span>
-  Currently in Vapi, India
-</p></center>
-<table style="width: 100%; border-collapse: collapse;">
-  <tr>
-    <td style="padding: 5px;">📞 (9909)112 848</td>
-    <td style="padding: 5px;">🌐 <a href="http://impurval.blogspot.com" target="_blank">impurval.blogspot.com</a></td>
-    <td style="padding: 5px;">📧 <a href="mailto:purval1992@gmail.com">purval1992@gmail.com</a></td>
-    <td style="padding: 5px;">🔗 <a href="https://www.linkedin.com/in/purval-patel-491a21a1" target="_blank">LinkedIn</a></td>
-    <td style="padding: 5px;">💻 <a href="https://www.github.com/purvalpatel" target="_blank">GitHub</a></td>
-  </tr>
-</table>
 
-</center>
+  <script>
+    (function() {
+      // 3D tilt effect
+      const card = document.getElementById('card3d');
+      const scene = document.getElementById('scene3d');
 
-  <section>
-    <h2>Objective</h2>
-    <p>Lead Devops/MLOps Engineer with 10+ Years of experiance in Linux systems, Kubernetes, Multi cloud platform engineering, NVIDIA AI infrastructure and MLops domain. 
-      Deep expertise in the Kubernetes ecosystem with extensive experience designing and implementing scalable systems across hybrid cloud and on-premises environments, 
-      currently driving MLOps initiatives by architecting AI/ML infrastructure using tools like Ray Data, Train for Distributed computing,
-    MLflow, and LangChain, focusing on building robust, cloud-native pipelines for machine learning workloads. experience in healthcare projects and AI model deployment, 
-      focused on delivering secure, scalable, and compliant AI-driven solutions to support clinical and operational systems.</p>
-  </section>
+      function handleMouseMove(e) {
+        const rect = scene.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;  // 0..1
+        const y = (e.clientY - rect.top) / rect.height;  // 0..1
 
-  <section>
-    <h2>Skills</h2>
-    <div class="skills-container">
-  <div class="skill"><i class="fas fa-cloud" data-tooltip="AWS, Auzre"></i> Cloud Infrastructure</div>
-  <div class="skill"><i class="fas fa-terminal" data-tooltip="OS customization, Developement"></i> Linux</div>
-  <div class="skill"><i class="fas fa-cogs" data-tooltip=""></i> Platform Engineering</div>
-  <div class="skill"><i class="fas fa-university"></i> Cloud Governance</div>
-  <div class="skill"><i class="fas fa-dollar-sign"></i> Cost Optimization</div>
-  <div class="skill"><i class="fas fa-check-circle"></i> Platform Reliability</div>
-  <div class="skill"><i class="fab fa-kubernetes"></i> Kubernetes</div>
-  <div class="skill"><i class="fas fa-boxes"></i> Containerization</div>
-  <div class="skill"><i class="fas fa-code"></i> Infrastructure as Code (IaC)</div>
-  <div class="skill"><i class="fas fa-sliders-h"></i> Configuration Management</div>
-  <div class="skill"><i class="fas fa-sync-alt"></i> CI/CD</div>
-  <div class="skill"><i class="fas fa-robot"></i> DevOps Automation</div>
-  <div class="skill"><i class="fas fa-project-diagram"></i> Workflow Optimization</div>
-  <div class="skill"><i class="fas fa-rocket"></i> Release Management</div>
-  <div class="skill"><i class="fas fa-eye"></i> Logging and Monitoring</div>
-  <div class="skill"><i class="fas fa-chart-line"></i> Observability</div>
-  <div class="skill"><i class="fas fa-user-shield"></i> Access Management</div>
-  <div class="skill"><i class="fas fa-user-shield"></i> Nvidia Eco System</div>
-</div>
-  </section>
+        // range of rotation: -6deg .. +6deg
+        const rotateX = (y - 0.5) * 10;   // positive = tilt back
+        const rotateY = (x - 0.5) * 12;   // positive = tilt right
+        const translateZ = 6 + (1 - Math.abs(x - 0.5) * 2) * 4;
 
-  <section>
-    <h2>Experience</h2>
-     <h3><i class="fas fa-building"></i> <a href="https://www.merillife.com/" target="_blank">Meril</a> (Vapi, India)</h3>  
-    <div class="job-title">MLOps Engineer </div> 
-    <div class="job-meta"><i class="fas fa-calendar calendar-icon"></i> May 2025 – Present</div>
-        <li>Running containerized applications on bare-metal servers using Docker and Kubernetes</li>
-        <li>Designed and managed scalable, secure Kubernetes clusters across multi-environment setups, ensuring high availability, performance, and compliance</li>
-        <li>Architected and managed on-premises Kubernetes clusters for GPU-accelerated AI/ML workloads, ensuring optimal GPU utilization and workload isolation</li>
-        <li>Managed large-scale Kubernetes infrastructure with ~50 GPU nodes</li>
-        <li>Implemented GPU resource orchestration (CUDA, NVIDIA drivers, NVIDIA device plugin) and GPU slicing using NVIDIA MIG for distributed training and inference workloads</li>
-        <li>Managing containers using Kubernetes and Helm charts</li>
-        <li>Worked with Different Nvidia GPU Models - H100, H200, RTX 6000, L40S, RTX 4090 </li>
-        <li>DevOps pipeline setup using GitLab CI/CD, self-hosted Docker registry (Quay), and ArgoCD</li>
-        <li>Integrated Kubernetes ecosystem tools including cert-manager, Istio, Kyverno, Prometheus, and Grafana for observability and policy enforcement</li>
-        
-        <li>Implemented and managed S3-compatible object storage solutions including MinIO, NetApp, Dell ECS, Garage, and Supabase</li>
-        <li>Designed and implemented MINIO-based storage for scalable AI/ML workloads</li>
-        
-        <li>Implemented end-to-end MLOps pipelines for model training, validation, deployment, and monitoring using Kubeflow and KServe</li>
-        <li>Responsible for designing ML deployment workflows and experiment tracking using MLflow</li>
-        
-        <li>Implemented model observability and monitoring using Phoenix, Grafana, Prometheus, DCGM Exporter, and Evidently AI (prompt and latency monitoring)</li>
-        <li>Performed GPU monitoring and troubleshooting using nvidia-smi, DCGM, and Nsight tools</li>
-        
-        <li>Installed and configured JupyterHub using Helm for multi-user ML environments</li>
-        
-        <li>Designed and deployed distributed computing and GenAI stack including Ray (Data & Train), LangChain, Quadrant D (Vector DB), and MinIO on Kubernetes</li>
-        <li>Build Scalable Model deployment infrastructure with KEDA.</li>
-        <li>Built RNA-Seq pipelines using AWS services including Lambda, HealthOmics, Batch, EC2, ECR, DynamoDB, and Step Functions</li>
-        
-        <li>Worked with eBPF-based tools (Falco) for kernel-level security monitoring and tracing</li>
-        <li>Worked with SAST/DAST Scanning tools : SonarQube, Burpsuits>
-    
-    </ul>
+        card.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) translateZ(${translateZ}px)`;
+      }
 
-    <h3><i class="fas fa-building"></i> <a href="https://uffizio.com" target="_blank">Uffizio India Pvt. Ltd.</a>(Valsad, India) </h3>  
-    <div class="job-title">Devops Engineer Lead </div> 
-    <div class="job-meta"><i class="fas fa-calendar calendar-icon"></i> Aug 2024 - May 2025 </div>
-    <div class="job-title">Sr. Devops Engineer</div> 
-    <div class="job-meta"><i class="fas fa-calendar calendar-icon"></i> Aug 2019 - Aug 2024 </div>
-    
-    <ul>
-      <li>Leading Team of 4 Devops engineers.</li>
-      <li>Actively manage, improve, and monitor cloud infrastructure on AWS: EC2, S3, RDS, S3 glacier, Global Accelerator, kineses and Cloud front, including backups, patches, and scaling, Direct connect, VPN tunneling.</li>
-      <li>Handling more thant 250+ Instance on AWS and On-premises.</li>
-      <li>Implemented Monitoring tools like Nagios, Zabbix, DataDog, NewRelic</li>
-      <li>Migrated the application in to Containarized environment.</li>
-      <li>Set up and maitainance of CICD with CICD tools : Jenkins, Ansible.</li>
-      <li>Handling installation and configuration of GitLab, JFrog, Kafka, Redis, RabbitMQ</li>
-      <li>Experiance with Databases: MongoDB, MySQL, Postgres, Cassandra</li>
-      <li>Setup NGINX as load balancer and RTMP server</li>
-      <li>WAF setup, and worked on vulnerability assessments</li>
-      <li>Good knowledge of Scripting: Bash, Python, Terraform</li>
-      <li>Webserver configuration and management : Nginx, Apache2, Tomcat</li>
-      <li>Responsible for Handling Domain and SSL management.</li>
-      <li>Established proactive monitoring using Nagios with integration of Call and SMS, Zabbix, DataDog integration.</li>
-      <li>Implemented centralised logging using Kibana, Elasticsearch, and Filebeat/Fluentd</li>
-      <li> Implemented the Velero tool for backup, restoring, and performing disaster recovery</li>
-    </ul>
+      function resetCard() {
+        card.style.transform = 'rotateX(2deg) rotateY(-1deg) translateZ(10px)';
+      }
 
-    <h3><i class="fas fa-building"></i> <a href="https://enjayworld.com" target="_blank">Enjay IT Solutions Ltd.</a> (Bhilad, India)</h3>
-    <div class="job-title">Linux Developer </div> 
-    <div class="job-meta"><i class="fas fa-calendar calendar-icon"></i> Mar 2016 – Aug 2019</div>
-    
-    <ul>
-      <li>Deveoped customized Linux os by modifying kernel and minimal server os according to customer requirements. i.e. Tiguin Desktop os, Tally Desktop os</li>
-      <li>Developed custom os for Connecting RDP server. i.e. Toranado os</li>
-      <liv>Create os which contains inbuild application for clients on premises installation. i.e. tallyoncloud, Thinclient os</liv>
-      <li>Managed 100+ servers</li>
-      <li>Patch management, server updates, alert systems</li>
-      <li>LDAP, NFS, SAMBA, FTP setup, webserver setup and maintainance</li>
-      <li>Bash Scripting, python</li>
-      <li>Driver/Package compilation and customization</li>
-      <li>Developed desktop applications using python gtk</li>
-      <li>VPN Server and client configuration</li>
-      <li>Setup in-house patch server for automatic application regular updates.</li>
-    </ul>
-  </section>
+      scene.addEventListener('mousemove', handleMouseMove);
+      scene.addEventListener('mouseleave', resetCard);
 
-  <section>
-    <h2>Education</h2>
-    <ul>
-      <li>MCA (73%) – University of Pune (2012–2015)</li>
-      <li>BCA – VNSGU Surat (2010–2012)</li>
-    </ul>
-  </section>
+      // rotating text
+      const words = ["DevOps Engineer", "SRE", "System Administrator", "MLOps", "DevSecOps"];
+      let idx = 0;
+      const wordEl = document.getElementById('word');
 
-  <section>
-    <h2>Certifications</h2>
-    <ul>
-      <li>RHCSA – RedHat Certified System Administrator</li>
-      <li>RHCE – RedHat Certified Engineer</li>
-      <li>Certified Infra AI Expert: End-to-End GPU-Accelerated AI</li>
-      <li>NCA-AIIO SoAI-Certified Associate: AI Infrastructure & Ops</li>
-      <li>Introducing MLOps: From Model Developement to Deployment (AI)</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Academic Projects</h2>
-    <ul>
-      <li>MCA: Online Shopping Portal (PHP), University of Pune (Mar 2015)</li>
-      <li>BCA: Restaurants Management System (PHP), VNSGU Surat (Apr 2012)</li>
-    </ul>
-  </section>
+      setInterval(() => {
+        idx = (idx + 1) % words.length;
+        wordEl.style.opacity = 0;
+        setTimeout(() => {
+          wordEl.textContent = words[idx];
+          wordEl.style.opacity = 1;
+        }, 250);
+      }, 2800);
+    })();
+  </script>
 
 </body>
 </html>
